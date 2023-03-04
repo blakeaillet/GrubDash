@@ -14,7 +14,7 @@ function list (req, res) {
 
 //POST /dishes This route will save the dish and respond with the newly created dish.
 //add validation to include name, description, price, image_url in POST orders
-const validateProperties = (req, res, next) => {
+function validateProperties(req, res, next) {
   const { data } = req.body;
   // check if body contains name, description, price and image_url
   const requiredProps = ['name', 'description', 'price', 'image_url'];
@@ -35,9 +35,6 @@ const validateProperties = (req, res, next) => {
     }
   });
   return next();
-}
-const findDishId = (dishId) => {
-    return dishes.find(({id}) => id===dishId)
 }
 
 //validation

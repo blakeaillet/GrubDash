@@ -10,7 +10,7 @@ function list (req, res) {
   res.json({ data: orders });
 }
 
-const validateProperties = (req, res, next) => {
+function validateProperties(req, res, next) {
   const { data } = req.body;
   const requiredProps = ['deliverTo', 'mobileNumber', 'dishes'];
   
@@ -57,13 +57,12 @@ function create(req, res) {
     res.status(201).json({ data: order });
 }
 
-const foundOrder = (orderId) => {
+function foundOrder(orderId) {
     return orders.find(({id}) => id===orderId);
 }
 
 function orderIdExists(req, res, next) {
     const { orderId } = req.params;
-    const foundOrder = orders.find((order) => order.id == orderId);
 
     if (foundOrder) {
         res.locals.order = foundOrder;
@@ -122,7 +121,7 @@ function update(req, res, next) {
     const order = res.locals.order;
     const { data: { deliverTo, mobileNumber, status, dishes } = {} } = req.body;
     
-    order.id = res.locals.order.id;
+    //order.id = res.locals.order.id;
     order.deliverTo = deliverTo;
     order.mobileNumber = mobileNumber;
     order.status = status;
